@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const config = require('./config/config');
+const morgan = require('morgan');
 
 //Application variable
 const PORT = process.env.PORT;
@@ -26,11 +27,14 @@ mongoose.connection.on('error', (err) => {
 //Bring the services
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
 //Bringing in the Routes
 const mainRoutes = require('./routes/mainRoute');
 const postRoutes = require('./routes/post');
+const followRoutes = require('./routes/follow');
 
 //Using the routes
 app.use('/', mainRoutes);
 app.use('/post', postRoutes);
+app.use('/follow', followRoutes);
