@@ -80,3 +80,35 @@ router.get('/myPost', checkJWT, (req, res) => {
     });
 });
 module.exports = router;
+
+
+
+//POST request
+//ROUTE: /post/editPost
+//INPUT: token, postId, {string: text}, {file: image}
+//DESC: Editing the post of the logged in user
+//Private Access
+router.post('/editPost', checkJWT, upload.single('image'), async(req,res) => {
+  let editFields = {};
+  editFields.author = req.decoded.data._id;
+  if(req.body.text) editFields.text = req.body.text;
+  var str = 'http://localhost:3002/';
+  if(req.file) editFields.image = str + req.file.path.replace(/\\/g,"/");
+  Post.findOneAndUpdate({ _id: req.body.postId }, { $set: editFields})
+          .then(updatedPost => res.send(updatedPost))
+          .catch(err => res.json(err));
+  
+});
+
+
+//POST request
+//ROUTE: /post/deletePost
+//INPUT: token, postId
+//DESC: Editing the post of the logged in user
+//Private Access
+router.post('/deletePost', checkJWT, (req,res) => {
+  id = req.body.postId;
+  Post.findOneAndDelete({_id: id});
+  res.send("deleted successfully");
+});
+

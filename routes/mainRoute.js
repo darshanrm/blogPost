@@ -73,3 +73,4 @@ router.delete('/logout', checkJWT, (req, res) => {
 });
 
 module.exports = router;
+
