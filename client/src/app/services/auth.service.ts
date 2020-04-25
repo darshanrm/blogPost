@@ -63,4 +63,13 @@ export class AuthService {
     headers = headers.append('Authorization', token);
     return this.http.post('http://localhost:3002/post/deletePost',postId, { headers:headers });
   }
+
+  editBlog(editedBlog){
+    console.log(editedBlog);
+    const token = localStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    headers = headers.append('Authorization', token);
+    return this.http.post('http://localhost:3002/post/editPost',editedBlog, { headers:headers });
+  }
 }

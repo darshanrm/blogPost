@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 export class MyPostsComponent implements OnInit {
   posts:any;
   modal:any;
+  editImage:any;
   newBlog:any;
   constructor(
     private router: Router,
@@ -45,6 +46,20 @@ deleteBlog(blogId){
     console.log(data);
     this.showBlogs();
   })
+}
+
+editBlog(modal2){
+  modal2.postId = modal2._id;
+  modal2.image = this.editImage;
+  this.authService.editBlog(modal2).subscribe((data:any)=>{});
+}
+
+selectImage(event){
+  console.log(event);
+  if(event.target.files.length > 0){
+    const file = event.target.files[0];
+    this.editImage = file;
+  }
 }
 
 
