@@ -56,7 +56,6 @@ export class AuthService {
   }
 
   deleteBlog(postId){
-    console.log(postId);
     let params = new HttpParams();
     params=params.set('comment_Id', postId);
     const token = localStorage.getItem('id_token');
@@ -67,11 +66,36 @@ export class AuthService {
   }
 
   editBlog(editedBlog){
-    console.log(editedBlog);
     const token = localStorage.getItem('id_token');
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
     headers = headers.append('Authorization', token);
     return this.http.post('http://localhost:3002/post/editPost',editedBlog, { headers:headers });
   }
+
+  getLikes(postId){
+    const token = localStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    headers = headers.append('Authorization', token);
+    return this.http.post('http://localhost:3002/like/getLikes', postId, { headers:headers });
+  }
+
+  likePost(postId){
+    const token = localStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    headers = headers.append('Authorization', token);
+    return this.http.post('http://localhost:3002/like', postId, { headers:headers });
+  }
+
+  dislikePost(postId){
+    const token = localStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    headers = headers.append('Authorization', token);
+    return this.http.post('http://localhost:3002/like/dislike', postId, { headers:headers });
+
+  }
+
 }

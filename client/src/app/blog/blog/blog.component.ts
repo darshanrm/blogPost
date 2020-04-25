@@ -14,6 +14,7 @@ export class BlogComponent implements OnInit {
 
   posts: any;
   modal:any;
+  likes:any;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -23,6 +24,7 @@ export class BlogComponent implements OnInit {
   ngOnInit() {
     this.posts= '';
     this.showBlogs();
+    
   }
 
   showBlogs(){
@@ -39,10 +41,24 @@ export class BlogComponent implements OnInit {
       for(var j=0;j<this.posts[i].value.length;j++){
         if((this.posts[i].value[j]._id) == blogId){
           this.modal = this.posts[i].value[j];
-          console.log(this.modal);
         }
       }
     }
+    this.showLikes(blogId);
+  }
+
+  showLikes(blogId){
+    this.authService.getLikes(blogId).subscribe((data:any)=>{
+      this.likes = data;
+    });
+  }
+
+  likePost(postId){
+    this.authService.likePost(postId).subscribe((data:any)=>{});
+  }
+
+  dislikePost(postId){
+    this.authService.dislikePost(postId).subscribe((data:any)=>{});
   }
 
 }

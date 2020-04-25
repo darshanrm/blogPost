@@ -48,8 +48,17 @@ router.post('/dislike',checkJWT,async (req, res) => {
             res.send("you are mean...you disliked the post");
         }
     }
-} 
-);
+});
 
+//getting total likes
+//get request
+//input: token, {String:blogId}
+router.post('/getLikes',checkJWT, async (req, res) => {
+    let likesLengthFields = {};
+    likesLengthFields.user = req.decoded.data._id;
+    if(req.body.postId) likesLengthFields.postId = req.body.postId;
+    let likes = await Likes.find({user: likesLengthFields.user, post:likesLengthFields.postId});
+    res.send(likes);
+});
 
 module.exports = router;
