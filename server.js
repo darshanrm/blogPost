@@ -33,8 +33,12 @@ app.use(morgan('dev'));
 const mainRoutes = require('./routes/mainRoute');
 const postRoutes = require('./routes/post');
 const followRoutes = require('./routes/follow');
+const likesRoutes = require('./routes/likes');
+const commentRoutes = require('./routes/comment');
 
 //Using the routes
 app.use('/', mainRoutes);
 app.use('/post', postRoutes);
 app.use('/follow', followRoutes);
+app.use('/like', likesRoutes);
+app.use('/comment', commentRoutes);

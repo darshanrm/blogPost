@@ -7,6 +7,7 @@ const checkJWT = require('../middlewares/auth');
 //Bringing in the models
 const Post = require('../models/posts');
 const Follow = require('../models/follow');
+const Likes = require('../models/likes');
 
 //Multer Components
 const storage = multer.diskStorage({
@@ -41,6 +42,7 @@ router.post('/createArticle', checkJWT, upload.single('image'), async (req, res)
   let postFields = {};
   postFields.author = req.decoded.data._id;
   if(req.body.text) postFields.text = req.body.text;
+  if(req.body.title) postFields.title = req.body.title;
   var str = 'http://localhost:3002/';
   if(req.file) postFields.image = str + req.file.path.replace(/\\/g,"/");
   let newPost = await new Post(postFields).save();
@@ -72,14 +74,12 @@ router.get('/getPost', checkJWT, async (req, res) => {
 //INPUT: token
 //DESC: Getting all the post of the loged in user
 //Private Access
-router.get('/myPost', checkJWT, (req, res) => {
+router.get('/myPost', checkJWT, async (req, res) => {
   let authId = req.decoded.data._id;
-  Post.find({ author: authId })
-    .then(myposts => {
-      res.send(myposts);
-    });
+  let myposts = await Post.find({ author: authId });
+  res.send(myposts);
+    
 });
-module.exports = router;
 
 
 
@@ -92,6 +92,7 @@ router.post('/editPost', checkJWT, upload.single('image'), async(req,res) => {
   let editFields = {};
   editFields.author = req.decoded.data._id;
   if(req.body.text) editFields.text = req.body.text;
+  if(req.body.title) editFields.title = req.body.title;
   var str = 'http://localhost:3002/';
   if(req.file) editFields.image = str + req.file.path.replace(/\\/g,"/");
   Post.findOneAndUpdate({ _id: req.body.postId }, { $set: editFields})
@@ -108,7 +109,9 @@ router.post('/editPost', checkJWT, upload.single('image'), async(req,res) => {
 //Private Access
 router.post('/deletePost', checkJWT, (req,res) => {
   id = req.body.postId;
-  Post.findOneAndDelete({_id: id});
-  res.send("deleted successfully");
+  Post.findOneAndRemove({_id: id})
+  .then(deletedPost => res.send(deletedPost))
+  .catch(err => res.json(err));
 });
 
+module.exports = router;

@@ -1,0 +1,66 @@
+.fab{
+    justify-content: right;
+    position: absolute;
+    right: 50px;
+    width: 100px;
+    height: 120px;
+} 
+
+.add-post-btn{
+    justify-content: right;
+    position: absolute;
+    right: 50px;
+    bottom: 0px;
+    width: 40px;
+    height: 100px;
+}
+
+.container{
+    max-width: 70%;
+}
+
+.statistics{
+    padding-top: 30px;
+    margin-left: 5px;
+    color: green;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+.text{
+    color: green;
+    display: inline-block;
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+footer{
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+}
+  
+  
+  

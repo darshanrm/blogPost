@@ -1,0 +1,10 @@
+<div class="container">
+    <input type="checkbox" id="toggle" />
+      <label class="button" for="toggle"></label>
+    <nav class="nav flex-column">
+      <a href="#" [routerLink]="['/']">Home</a>
+      <a href="#" [routerLink]="['/myPosts']">My posts</a>
+      <a href="#" target="_blank">View bloggers</a>
+      <a href="#" (click) = logOut()>Sign Out</a>
+    </nav>
+    </div>
