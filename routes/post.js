@@ -107,8 +107,8 @@ router.post('/editPost', checkJWT, upload.single('image'), async(req,res) => {
 //INPUT: token, postId
 //DESC: Editing the post of the logged in user
 //Private Access
-router.post('/deletePost', checkJWT, (req,res) => {
-  id = req.body.postId;
+router.delete('/deletePost/:postId', checkJWT, (req,res) => {
+  id = req.params.postId;
   Post.findOneAndRemove({_id: id})
   .then(deletedPost => res.send(deletedPost))
   .catch(err => res.json(err));

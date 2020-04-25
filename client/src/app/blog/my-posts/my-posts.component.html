@@ -14,7 +14,7 @@
           <p>Comments: 23</p>
         </div>
         <button (click)="showModal(post.value._id)" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Edit</button>
-        <button class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+        <button (click)="deleteBlog(post.value._id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
 
 
          <!-- The Modal -->

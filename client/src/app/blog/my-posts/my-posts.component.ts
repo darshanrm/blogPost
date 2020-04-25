@@ -27,7 +27,6 @@ export class MyPostsComponent implements OnInit {
     this.authService.getMyPosts().subscribe((data:any) => {
       this.posts = data;
       this.posts = Object.entries(this.posts).map(([key, value]) => ({key, value}));
-      console.log(this.posts);  
     });
   }
 
@@ -41,10 +40,9 @@ showModal(blogId){
 
 deleteBlog(blogId){
   console.log(blogId);
-  this.authService.deleteBlog(blogId).subscribe((data:any)=>{
+    this.authService.deleteBlog(blogId).subscribe((data:any)=>{
     console.log("post deleted");
     console.log(data);
-    this.showBlogs();
   })
 }
 
@@ -55,7 +53,6 @@ editBlog(modal2){
 }
 
 selectImage(event){
-  console.log(event);
   if(event.target.files.length > 0){
     const file = event.target.files[0];
     this.editImage = file;
