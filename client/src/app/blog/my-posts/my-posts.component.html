@@ -1,66 +1,59 @@
 <div class="fab"><app-floating-button></app-floating-button></div>
 <app-top-bar></app-top-bar>
 <div *ngFor="let post of posts">
-<div class="container">
-        <div class="card border-left-info shadow h-100 py-2" style="margin-top: 20px;">
-            <div class="card-header"> {{post.value.title}}
-            </div>
-            <div class="card-body blog-content">{{post.value.text}}
-            </div>        
-        </div>
-        <div class="statistics">
-          <p>Created on: {{post.value.createdAt}} </p>
-          <p>Likes: 100</p>
-          <p>Comments: 23</p>
-        </div>
-        <button (click)="showModal(post.value._id)" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Edit</button>
-        <button (click)="deleteBlog(post.value._id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+  <div class="container">
+    <div class="card border-left-info shadow h-100 py-2" style="margin-top: 20px;">
+      <div class="card-header"> {{post.value.title}}</div>
+      <div class="card-body blog-content">{{post.value.text}}</div>        
+    </div>
+    <div class="statistics">
+      <p>Created on: {{post.value.createdAt}} </p>
+      <p>Likes: 100</p>
+      <p>Comments: 23</p>
+    </div>
+    <button (click)="showModal(post.value._id)" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Edit</button>
+    <button (click)="deleteBlog(post.value._id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
 
 
-         <!-- The Modal -->
-         <div class="modal" id="myModal">
-          <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
             
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <input type="text" name="heading" id="heading" class="form-control input-lg" placeholder="header" [(ngModel)]="modal.value.title">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-              </div>
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <input type="text" name="heading" id="heading" class="form-control input-lg" placeholder="header" [(ngModel)]="modal.value.title">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+          </div>
 
-              <!-- Modal body -->
-              <div class="modal-body">
+          <!-- Modal body -->
+          <div class="modal-body">
               
-                <!-- Image upload -->
-               <form>
-                <div class="input-group col-xs-12">
-                  <input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
-                  <label for="myfile" class="browse btn btn-primary input-lg">Select a File
+            <!-- Image upload -->
+            <form>
+              <div class="input-group col-xs-12">
+                <input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
+                <label for="myfile" class="browse btn btn-primary input-lg">Select a File
                   <input (change)="selectImage($event)" type="file" id="myfile" name="myfile">
-                  </label>
-                </div>
-              </form>
+                </label>
+              </div>
+            </form>
                  
-              <!-- Caption -->
-              
-                <h6>Type your blog body here...</h6><br>
-                <textarea name="blog-body" placeholder="type blog" id="blog-body" cols="63" rows="10"
-                 [(ngModel)]= "modal.value.text">
-                </textarea>
+            <!-- Caption -->  
+            <h6>Type your blog body here...</h6><br>
+            <textarea name="blog-body" placeholder="type blog" id="blog-body" cols="63" rows="10" [(ngModel)]= "modal.value.text"></textarea>
               
             <!--Modal body ends-->  
-            </div>
+          </div>
               
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button (click)="editBlog(modal.value)" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
-              </div>
-            </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button (click)="editBlog(modal.value)" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
           </div>
         </div>
-
-  
-</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -68,45 +61,51 @@
                    
 
 
-      <footer><div class="add-post-btn"><button type="button" class="btn btn-success btn-circle btn-xl" data-toggle="modal" data-target="#myModal2"><i class="fa fa-plus"></i></button></div>
-      <div class="text">Create Post</div>
-    </footer>			
-      <!-- The Modal -->
-      <div class="modal" id="myModal2">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
+<footer>
+  <div class="add-post-btn">
+    <button type="button" class="btn btn-success btn-circle btn-xl" data-toggle="modal" data-target="#myModal2">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+  <div class="text">Create Post</div>
+</footer>			
+      
+<!-- The Modal -->
+<div class="modal" id="myModal2">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
           
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <input type="text" name="heading" id="header" class="form-control input-lg" placeholder="Type Blog Title here">
-              <button type="button" class="close" data-dismiss="modal">×</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-            
-              <!-- Image upload -->
-             <form>
-              <div class="input-group col-xs-12">
-                <input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
-                <label for="myfile" class="browse btn btn-primary input-lg">Select a File
-                <input (change)="selectImage($event)" type="file" id="uploadmyfile" name="myfile">
-                </label>
-              </div>
-            </form>
-               
-            <!-- Caption -->
-            
-              <h6>Type your blog body here...</h6><br>
-              <textarea name="blog-body" id="blog-body" cols="63" rows="10"></textarea>
-            
-          <!--Modal body ends-->  
-          </div>
-            
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Submit Post</button>
-            </div>
-          </div>
-        </div>
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <input type="text" name="newHeading" id="newHeading" class="form-control input-lg" 
+          placeholder="Type Blog Title here" [(ngModel)] = "newBlog.title">
+        <button type="button" class="close" data-dismiss="modal">×</button>
       </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+            
+        <!-- Image upload -->
+        <form>
+          <div class="input-group col-xs-12">
+            <input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
+            <label for="newfile" class="browse btn btn-primary input-lg">Select a File
+              <input (change)="createImage($event)" type="file" id="newfile" name="newfile">
+            </label>
+          </div>
+        </form>
+               
+        <!-- Caption -->
+        <h6>Type your blog body here...</h6><br>
+        <textarea name="blog-body" id="blog-body" cols="63" rows="10" [(ngModel)] = "newBlog.text"></textarea>
+            
+        <!--Modal body ends-->  
+      </div>
+            
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button (click)="createPost()" type="button" class="btn btn-primary" data-dismiss="modal">Submit Post</button>
+      </div>
+    </div>
+  </div>
+</div>

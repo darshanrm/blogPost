@@ -12,6 +12,7 @@ export class MyPostsComponent implements OnInit {
   posts:any;
   modal:any;
   editImage:any;
+  newImage:any;
   newBlog:any;
   constructor(
     private router: Router,
@@ -20,10 +21,15 @@ export class MyPostsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.newBlog={
+      title:'',
+      text:'',
+      image:''
+    }
     this.showBlogs();
   }
 
-  showBlogs(){
+showBlogs(){
     this.authService.getMyPosts().subscribe((data:any) => {
       this.posts = data;
       this.posts = Object.entries(this.posts).map(([key, value]) => ({key, value}));
@@ -59,5 +65,19 @@ selectImage(event){
   }
 }
 
+
+createImage(event){
+  if(event.target.files.length > 0){
+    const file = event.target.files[0];
+    this.newImage = file;
+  }
+}
+
+createPost(){
+  this.newBlog.image = this.newImage;
+  this.authService.createPost(this.newBlog).subscribe((data:any)=>{
+    console.log(data);
+  });
+}
 
 }
