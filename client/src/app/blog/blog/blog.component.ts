@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class BlogComponent implements OnInit {
 
   posts: any;
-
+  modal:any;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -22,12 +22,27 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
     this.posts= '';
-    this.authService.getBlogs().subscribe(( data:any ) => {
+    this.showBlogs();
+  }
+
+  showBlogs(){
+      this.authService.getBlogs().subscribe(( data:any ) => {
       if(data){
         this.posts = Object.entries(data).map(([type, value]) => ({type, value}));
         console.log(this.posts);
       }
-    })
+    });
+  }
+  showModal(blogId){
+    console.log(blogId);
+    for(var i=0;i<this.posts.length;i++){
+      for(var j=0;j<this.posts[i].value.length;j++){
+        if((this.posts[i].value[j]._id) == blogId){
+          this.modal = this.posts[i].value[j];
+          console.log(this.modal);
+        }
+      }
+    }
   }
 
 }
