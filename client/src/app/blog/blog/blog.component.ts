@@ -15,6 +15,7 @@ export class BlogComponent implements OnInit {
   posts: any;
   modal:any;
   likes:any;
+  comments:any;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -45,6 +46,7 @@ export class BlogComponent implements OnInit {
       }
     }
     this.showLikes(blogId);
+    this.showComments(blogId);
   }
 
   showLikes(blogId){
@@ -59,6 +61,26 @@ export class BlogComponent implements OnInit {
 
   dislikePost(postId){
     this.authService.dislikePost(postId).subscribe((data:any)=>{});
+  }
+
+  postComment(postId){
+    const text = (document.getElementById('comment') as HTMLInputElement).value;
+    (document.getElementById('comment') as HTMLInputElement).value = '';
+    const comment = {
+      post : postId,
+      comment: text
+    }
+    this.authService.postComment(comment).subscribe((data:any)=>{});
+  }
+
+  showComments(postId){
+      this.authService.showComments(postId).subscribe((data:any)=>{
+      this.comments = data;
+    });
+  }
+
+  deleteComment(commentId){
+    this.authService.deleteComment(commentId).subscribe((data:any)=>{});
   }
 
 }

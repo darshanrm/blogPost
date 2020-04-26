@@ -28,11 +28,11 @@ router.post('/', checkJwt, async (req, res) => {
 //route: /comment/show
 //input: token, {String: post}
 //private access
-router.post('/show', checkJwt, async (req,res) =>{
+router.get('/show/:postId', checkJwt, async (req,res) =>{
     let commentFields = {};
     commentFields.user = req.decoded.data._id;
-    if(req.body.post) commentFields.post = req.body.post;
-    let comments = await Comment.find({user : commentFields.user, post : commentFields.post});
+    if(req.params.postId) commentFields.post = req.params.postId;
+    let comments = await Comment.find({post : commentFields.post});
     if(comments){
         res.send(comments);
     }else{
@@ -44,15 +44,22 @@ router.post('/show', checkJwt, async (req,res) =>{
 //route: /comment/delete
 //privat access
 //input: token, {String: commentId}
-router.post('/delete', checkJwt, (req, res) => {
-    Comment.findOneAndRemove({_id : req.body.comment})
-    .then(deletedComment => res.send(deletedComment+ " deleted successfully"))
-    .catch(err => res.json(err));
-});
-
-
-
-
+router.delete('/delete/:comment_id', checkJwt, async (req, res) => {
+    const loggedUser = req.decoded.data._id;
+    const selectedComment = await Comment.findOne({ _id: req.params.comment_id });
+    if(selectedComment){
+      const author = selectedComment.user;
+      if(author.equals(loggedUser) == true){
+        const removedComment = await Comment.findOneAndRemove({ _id: selectedComment.id });
+        res.send(removedComment);
+      }else{
+        res.send('You are not the author of this Comment');
+      }
+    }else{
+      res.send('No Comments find at this URL');
+    }
+  });
+  
 
 
 module.exports = router;

@@ -98,4 +98,32 @@ export class AuthService {
 
   }
 
+  postComment(comment){
+    const token = localStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    headers = headers.append('Authorization', token);
+    return this.http.post('http://localhost:3002/comment', comment, { headers:headers });    
+  }
+
+  showComments(postId){
+    let params = new HttpParams();
+    params=params.set('postId', postId);
+    const token = localStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/x-www-form-urlencoded');
+    headers = headers.append('Authorization', token);
+    return this.http.get('http://localhost:3002/comment/show/'+postId, { headers:headers, params:params });    
+  }
+
+  deleteComment(comment_Id){
+    let params = new HttpParams();
+    params=params.set('comment_Id', comment_Id);
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('id_token');
+    headers.set('Content-Type','application/json');
+    headers = headers.append('Authorization', token);
+    return this.http.delete('http://localhost:3002/comment/delete/'+comment_Id,{ headers: headers, params : params });
+  }
+
 }
