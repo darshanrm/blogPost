@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./my-posts.component.css']
 })
 export class MyPostsComponent implements OnInit {
+  likes:any;
+  comments:any;
   posts:any;
   modal:any;
   editImage:any;
@@ -34,6 +36,10 @@ showBlogs(){
       this.posts = data;
       this.posts = Object.entries(this.posts).map(([key, value]) => ({key, value}));
     });
+    for(var i=0;i<this.posts.length;i++){
+      this.showLikes(this.posts[i]._id);
+      this.showComments(this.posts[i]._id);
+    }
   }
 
 showModal(blogId){
@@ -43,6 +49,21 @@ showModal(blogId){
     }
   }
 }
+
+showLikes(blogId){
+  this.authService.getLikes(blogId).subscribe((data:any)=>{
+    this.likes = data;
+    console.log(this.likes);
+  });
+}
+
+
+showComments(postId){
+  this.authService.showComments(postId).subscribe((data:any)=>{
+  this.comments = data;
+});
+}
+
 
 deleteBlog(blogId){
   console.log(blogId);

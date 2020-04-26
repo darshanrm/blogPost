@@ -1,18 +1,11 @@
-blogPost
-  --package.json
-  --server.js
-  --/public
-    --index.html
-    --index.js
-  --/routes
-      --mainRoute.js
-      --post.js
-  --/models
-    --users.js
-    --posts.js
-    --profile.js
-    --message.js
-  --/middlewares
-    --auth.js
-  --/config
-    --config.js
+ToDo:
+[x] display author name below blog title on home page
+[x] display author name for comments
+[] display delete button for own comments
+[] like button color to blue if already liked
+[] deploy uploads folder on static server
+[] total likes on myPosts page
+[] total comments on myPosts page
+
+[] show all bloggers
+[] follow bloggers

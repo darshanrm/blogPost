@@ -8,8 +8,8 @@
     </div>
     <div class="statistics">
       <p>Created on: {{post.value.createdAt}} </p>
-      <p>Likes: 100</p>
-      <p>Comments: 23</p>
+      <p>Likes: {{likes}}</p>
+      <p>Comments: {{comments}}</p>
     </div>
     <button (click)="showModal(post.value._id)" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Edit</button>
     <button (click)="deleteBlog(post.value._id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>

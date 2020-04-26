@@ -60,7 +60,7 @@ router.get('/getPost', checkJWT, async (req, res) => {
   var j = 0;
   for(var i=0;i<followings.length;i++){
     let checkPost = {};
-    checkPost = await Post.find({ author: followings[i].followed });
+    checkPost = await Post.find({ author: followings[i].followed }).populate('author');
     if(checkPost != ''){
       Posts[j] = checkPost;
       j++;

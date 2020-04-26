@@ -37,6 +37,7 @@ const likesRoutes = require('./routes/likes');
 const commentRoutes = require('./routes/comment');
 
 //Using the routes
+app.use('/uploads',express.static('uploads'));
 app.use('/', mainRoutes);
 app.use('/post', postRoutes);
 app.use('/follow', followRoutes);

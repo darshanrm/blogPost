@@ -8,6 +8,7 @@
 
 
 .layout{
+    background-color: palevioletred;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -24,11 +25,13 @@
 
 
 .content-box{
+    background-color: lightblue;
     display: flex;
     flex-direction: column;
     max-width: 700px;
-    margin: auto;
-    padding-top: 50px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 25%;
 }
 
 .scroll{

@@ -16,6 +16,8 @@ export class BlogComponent implements OnInit {
   modal:any;
   likes:any;
   comments:any;
+  user:any;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -25,7 +27,11 @@ export class BlogComponent implements OnInit {
   ngOnInit() {
     this.posts= '';
     this.showBlogs();
-    
+    this.getUser();
+  }
+
+  getUser(){
+    this.user = this.authService.getUser();
   }
 
   showBlogs(){
@@ -76,6 +82,7 @@ export class BlogComponent implements OnInit {
   showComments(postId){
       this.authService.showComments(postId).subscribe((data:any)=>{
       this.comments = data;
+      console.log(this.comments);
     });
   }
 

@@ -32,7 +32,7 @@ router.get('/show/:postId', checkJwt, async (req,res) =>{
     let commentFields = {};
     commentFields.user = req.decoded.data._id;
     if(req.params.postId) commentFields.post = req.params.postId;
-    let comments = await Comment.find({post : commentFields.post});
+    let comments = await Comment.find({post : commentFields.post}).populate('user');
     if(comments){
         res.send(comments);
     }else{
